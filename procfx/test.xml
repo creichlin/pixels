@@ -1,0 +1,5 @@
+<procfx>
+  <define name="noise1">
+    <Noise width="32" height="32"/>
+  </define>
+</procfx>

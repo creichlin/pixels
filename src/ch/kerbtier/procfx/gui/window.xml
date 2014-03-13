@@ -1,0 +1,39 @@
+<pixels:MainWindow title="Pixels many!" maximized="true"
+    xmlns:bxml="http://pivot.apache.org/bxml"
+    xmlns:pixels="ch.kerbtier.procfx.gui"
+    xmlns="org.apache.pivot.wtk">
+
+
+    <TablePane styles="{padding:4, horizontalSpacing:3, verticalSpacing:3}">
+	    <columns>
+	        <TablePane.Column width="1*" />
+	    </columns>
+
+	    <TablePane.Row height="-1">
+	      <Border>
+
+		    </Border>
+	    </TablePane.Row>
+
+      <TablePane.Row height="-1">
+        <Border>
+
+        </Border>
+      </TablePane.Row>
+
+      <TablePane.Row height="1*">
+        <SplitPane orientation="horizontal" splitRatio="0.5">
+          <left>
+	          <Border>
+              <bxml:include src="imagePane.bxml"/>
+	          </Border>
+	        </left>
+	        <right>
+	          <Border>
+              <bxml:include src="programPane.bxml"/>
+	          </Border>
+          </right>
+        </SplitPane>
+      </TablePane.Row>
+    </TablePane>
+</pixels:MainWindow>

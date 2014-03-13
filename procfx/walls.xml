@@ -1,0 +1,153 @@
+<procfx>
+    
+  <parameter name="stonePattern"/>
+    
+	<define name="bricks">
+		<Tile width="64" height="64">
+			<Draw>
+				<Canvas width="32" height="32" color="#0" />
+				<Rectangle x1="2" y1="2" x2="30" y2="14" fillColor="#ff" />
+				<Rectangle x1="18" y1="18" x2="46" y2="30" fillColor="#ff" />
+			</Draw>
+		</Tile>
+	</define>
+
+	<define name="naturalBricks">
+		<Threshold value="0.03">
+			<VoronoiBorderGradient scale="16">
+				<Noise width="8" height="8" />
+				<Noise width="8" height="8" seed="1" />
+			</VoronoiBorderGradient>
+		</Threshold>
+	</define>
+
+	<define name="blurVoronoiBricks">
+    <Threshold value="0.03">
+      <VoronoiBorderGradient scale="16">
+        <Blur><Noise width="8" height="8" /></Blur>
+        <Blur><Noise width="8" height="8" seed="1" /></Blur>
+      </VoronoiBorderGradient>
+    </Threshold>
+  </define>
+
+  <define name="blurVVoronoiBricks">
+    <Threshold value="0.03">
+      <VoronoiBorderGradient scale="16">
+        <Noise width="8" height="8" />
+        <Blur>
+          <Noise width="8" height="8" seed="1" />
+        </Blur>
+      </VoronoiBorderGradient>
+    </Threshold>
+  </define>
+  
+  <define name="horizontalVoronoiBricks">
+    <Threshold value="0.03">
+      <VoronoiBorderGradient scale="16">
+        <Noise width="8" height="8" seed="1" />
+        <Canvas width="8" height="8" />
+      </VoronoiBorderGradient>
+    </Threshold>
+  </define>
+  
+  		
+	<define name="roundedBricks">
+		<Threshold value="0.5">
+			<Blur times="2">
+				<Multiply factor="0.7">
+					<Add>
+						<Tile width="128" height="128">
+						  <Use name="bricks" />
+						</Tile>
+						<Multiply factor="0.5">
+							<Noise width="128" height="128" />
+						</Multiply>
+					</Add>
+				</Multiply>
+			</Blur>
+		</Threshold>
+	</define>
+
+	<define name="wallShape">
+		<Threshold value="0.6">
+			<Halo radius="2" type="min">
+				<Multiply>
+					<Invert>
+						<Image file="procfx/walls/h1in.png" />
+					</Invert>
+					<Tile width="512" height="512">
+						<Use name="blurVoronoiBricks" />
+					</Tile>
+				</Multiply>
+			</Halo>
+		</Threshold>
+	</define>
+
+
+	<define name="stones" mode="rgb">
+		<ColorMap gradient="#000000 1%,#c12300 100%">
+			<Emboss>
+				<Blur>
+					<Multiply factor="0.8">
+						<Add>
+							<Blur>
+								<Use name="wallShape" />
+							</Blur>
+							<Multiply factor="0.8">
+								<Noise width="512" height="512" />
+							</Multiply>
+						</Add>
+					</Multiply>
+				</Blur>
+			</Emboss>
+		</ColorMap>
+	</define>
+
+	<define name="mortar" mode="rgb">
+		<ColorMap gradient="#332111 2%,#000000 100%">
+			<Blur>
+				<Multiply factor="0.8">
+					<Add>
+						<Halo type="max" radius="2">
+							<Use name="wallShape" />
+						</Halo>
+						<Multiply factor="0.6">
+							<Noise width="512" height="512" />
+						</Multiply>
+					</Add>
+				</Multiply>
+			</Blur>
+		</ColorMap>
+	</define>
+
+	<define name="wall" mode="rgb">
+		<Blend>
+			<Use name="stones" />
+			<Use name="mortar" />
+			<Blur>
+				<Use name="wallShape" />
+			</Blur>
+		</Blend>
+	</define>
+
+	<define name="out" mode="rgb">
+		<Blend>
+			<Use name="wall" />
+			<Canvas width="512" height="512" color="#22aa44" />
+			<Blur>
+			<Threshold value="0.5">
+				<Blur times="3">
+				  <Multiply factor="0.5">
+					  <Add>
+					    <Invert><Image file="procfx/walls/h1in.png" /></Invert>
+					    <Use name="wallShape"/>
+					  </Add>
+					</Multiply>
+				</Blur>
+			</Threshold>
+			</Blur>
+		</Blend>
+	</define>
+
+
+</procfx>

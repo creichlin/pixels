@@ -1,0 +1,27 @@
+<procfx>
+  <define name="block">
+    <Draw>
+      <Canvas width="100" height="100"/>
+      <Rectangle coords="20, 20, 80, 80" fill-color="#ff"/>
+    </Draw>
+  </define>
+  
+  <define name="halo-min">
+    <Halo type="min" radius="2">
+      <Use name="block"/>
+    </Halo>
+  </define>
+    
+  <define name="halo-max">
+    <Halo type="max" radius="2">
+      <Use name="block"/>
+    </Halo>
+  </define>
+    
+    <define name="halo-current">
+    <Halo type="current" radius="2">
+      <Use name="block"/>
+    </Halo>
+  </define>
+  
+</procfx>

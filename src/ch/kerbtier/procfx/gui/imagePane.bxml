@@ -1,0 +1,7 @@
+<pixels:ImagePane  horizontalScrollBarPolicy="fill"
+    xmlns:bxml="http://pivot.apache.org/bxml"
+    xmlns:pixels="ch.kerbtier.procfx.gui"
+    xmlns="org.apache.pivot.wtk">
+    
+      <ImageView bxml:id="image"/>
+</pixels:ImagePane>

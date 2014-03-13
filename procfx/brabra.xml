@@ -1,0 +1,22 @@
+<procfx>
+  <parameter name="stonePattern"/>
+    
+  <define name="field-borders">
+    <Tile width="288" height="720">
+      <Draw>
+        <Canvas width="24" height="24" color="#00" />
+        <Rectangle x1="1" y1="1" x2="22" y2="22" fillColor="#ff" />
+      </Draw>
+    </Tile>
+  </define>
+
+  <define name="out" mode="rgb">
+    <ColorMap gradient="#000000 1%,#c12300 100%">
+      <Emboss>
+        <Blur>
+          <Use name="field-borders" />
+        </Blur>
+      </Emboss>
+    </ColorMap>
+  </define>
+</procfx>

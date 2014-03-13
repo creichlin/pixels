@@ -1,0 +1,9 @@
+<pixels:ProgramPane  horizontalScrollBarPolicy="fill"
+    xmlns:bxml="http://pivot.apache.org/bxml"
+    xmlns:pixels="ch.kerbtier.procfx.gui"
+    xmlns="org.apache.pivot.wtk">
+    
+      <BoxPane orientation="vertical" bxml:id="elementList" styles="{fill:true,padding:{left:2, right:2}}">
+
+      </BoxPane>
+</pixels:ProgramPane>
