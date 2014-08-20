@@ -17,12 +17,6 @@ public class DefaultRgbCanvasOperation extends DefaultRgbCanvasProducer {
   }
 
   @Override
-  public void calculate() {
-    super.calculate();
-    source.calculate();
-  }
-
-  @Override
   public float[] red() {
     return red;
   }
@@ -37,4 +31,17 @@ public class DefaultRgbCanvasOperation extends DefaultRgbCanvasProducer {
     return blue;
   }
 
+  @Override
+  public void calculate(boolean force) {
+    source.calculate(true);
+    super.calculate(force);
+  }
+
+  @Override
+  public void reset() {
+    super.reset();
+    source.reset();
+  }
+
+  
 }

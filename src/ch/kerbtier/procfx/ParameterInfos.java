@@ -70,7 +70,7 @@ public class ParameterInfos {
       return pi.indexed(listIndex);
     } else {
       if(mustBeList) {
-        throw new RuntimeException("expected list or not enough positioned parameters");
+        throw new WrongParameterException("expected list or not enough positioned parameters");
       }
       return pi;
     }

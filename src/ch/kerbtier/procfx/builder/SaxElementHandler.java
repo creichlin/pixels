@@ -10,6 +10,7 @@ import ch.kerbtier.procfx.MiniParsers;
 import ch.kerbtier.procfx.NamedParameterInfo;
 import ch.kerbtier.procfx.ParameterInfo;
 import ch.kerbtier.procfx.ParameterInfos;
+import ch.kerbtier.procfx.WrongParameterException;
 import ch.kerbtier.procfx.model.Facade;
 
 public class SaxElementHandler extends DefaultHandler {
@@ -43,7 +44,13 @@ public class SaxElementHandler extends DefaultHandler {
 
     } else {
       Object parent = facade.get(path);
-      ParameterInfo pi = new ParameterInfos(parent).getParameter(nodeIndex.peek());
+      ParameterInfo pi = null;
+      
+      try {
+        pi = new ParameterInfos(parent).getParameter(nodeIndex.peek());
+      } catch(WrongParameterException wpi) {
+        throw new WrongParameterException("wrong parameter " + nodeIndex.peek() + " for " + tag);
+      }
       
       Class<?> classDef = Declarations.get(tag, pi.isRGB());
       

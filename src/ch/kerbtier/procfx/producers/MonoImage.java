@@ -1,5 +1,6 @@
 package ch.kerbtier.procfx.producers;
 
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.awt.image.Raster;
 import java.io.File;
@@ -17,6 +18,13 @@ public class MonoImage extends DefaultMonoCanvasProducer {
     if (bi == null) {
       try {
         bi = ImageIO.read(new File(file));
+        
+        BufferedImage cpy = new BufferedImage(bi.getWidth(), bi.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = cpy.createGraphics();
+        g2d.drawImage(bi, 0, 0, null);
+        g2d.dispose();
+        bi = cpy;
+        
       } catch (IOException e) {
         e.printStackTrace();
       }

@@ -61,7 +61,7 @@ public class BlurRGB extends DefaultRgbCanvasOperation {
             * 4 * PART + source[repeat(x + 1, y, width, height)] * 2 * PART
             + source[repeat(x - 1, y, width, height)] * 2 * PART
             + source[repeat(x, y + 1, width, height)] * 2 * PART
-            + source[repeat(x, y + 1, width, height)] * 2 * PART +
+            + source[repeat(x, y - 1, width, height)] * 2 * PART +
 
             source[repeat(x + 1, y + 1, width, height)] * PART
             + source[repeat(x - 1, y + 1, width, height)] * PART

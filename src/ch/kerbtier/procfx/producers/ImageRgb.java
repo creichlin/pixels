@@ -22,6 +22,10 @@ public class ImageRgb extends DefaultRgbCanvasProducer {
       }
     }
   }
+  
+  public void reset() {
+    super.reset();
+  }
 
   @Override
   public void calculate() {

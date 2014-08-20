@@ -15,21 +15,29 @@ public class Declarations {
     declare("Blur", ch.kerbtier.procfx.filter.Blur.class, ch.kerbtier.procfx.filter.BlurRGB.class);
     declare("Multiply", ch.kerbtier.procfx.operation.Multiply.class, ch.kerbtier.procfx.operation.MultiplyRgb.class);
     declare("Add", ch.kerbtier.procfx.operation.Add.class);
+    declare("Max", ch.kerbtier.procfx.operation.Max.class);
+    declare("Min", ch.kerbtier.procfx.operation.Min.class);
+    declare("Diff", ch.kerbtier.procfx.operation.Diff.class);
     declare("ColorMap", null, ch.kerbtier.procfx.color.ColorMap.class);
     declare("Invert", ch.kerbtier.procfx.operation.MonoInvert.class, ch.kerbtier.procfx.operation.InvertRgb.class);
     declare("Blend", null, ch.kerbtier.procfx.operation.Blend.class);
     declare("Emboss", ch.kerbtier.procfx.filter.Emboss.class);
     declare("Halo", ch.kerbtier.procfx.filter.Halo.class);
     declare("Tile", ch.kerbtier.procfx.producers.MonoTile.class);
-    declare("Mono", null, ch.kerbtier.procfx.operation.ToMonoRgb.class);
+    declare("Mono", ch.kerbtier.procfx.operation.ToMonoMono.class, ch.kerbtier.procfx.operation.ToMonoRgb.class);
     declare("Image", ch.kerbtier.procfx.producers.MonoImage.class, ch.kerbtier.procfx.producers.ImageRgb.class);
+    declare("DiamondSquare", ch.kerbtier.procfx.producers.DiamondSquareMono.class);
+    declare("Expand", ch.kerbtier.procfx.operation.ExpandMono.class);
+    declare("Scale", ch.kerbtier.procfx.geometry.ScaleMono.class);
+    declare("WaterErosion", ch.kerbtier.procfx.filter.WaterErosion.class);
+    
     
     // Parameters
     declare("Use", ch.kerbtier.procfx.parameters.Use.class, ch.kerbtier.procfx.parameters.UseRgb.class);
-    declare("Parameter", ch.kerbtier.procfx.parameters.ParameterMono.class, ch.kerbtier.procfx.parameters.ParameterRgb.class);
     
     // Modifiers
     declare("Rectangle", ch.kerbtier.procfx.draw.MonoRectangle.class);
+    declare("Circle", ch.kerbtier.procfx.draw.MonoCircle.class);
     declare("Text", ch.kerbtier.procfx.draw.MonoText.class);
 
   }

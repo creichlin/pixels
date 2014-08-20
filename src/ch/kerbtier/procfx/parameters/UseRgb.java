@@ -1,5 +1,6 @@
 package ch.kerbtier.procfx.parameters;
 
+import ch.kerbtier.procfx.core.Canvas;
 import ch.kerbtier.procfx.core.DefaultRgbCanvasProducer;
 import ch.kerbtier.procfx.core.RgbCanvas;
 
@@ -9,24 +10,39 @@ public class UseRgb extends DefaultRgbCanvasProducer {
 
   @Override
   public int width() {
+    return getSourceCanvas().width();
+  }
+
+  private Canvas getSourceCanvas() {
     String target = "groups{" + getGroup() + "}.elements{" + name + "}.canvas";
-    RgbCanvas source = (RgbCanvas) getFacade().get(target);
-    return source.width();
+    Canvas source = (Canvas) getFacade().get(target);
+    return source;
   }
 
   @Override
   public int height() {
-    String target = "groups{" + getGroup() + "}.elements{" + name + "}.canvas";
-    RgbCanvas source = (RgbCanvas) getFacade().get(target);
-    return source.height();
+    return getSourceCanvas().height();
+  }
+  
+  public void reset() {
+    Canvas source = getSourceCanvas();
+    source.reset();
+    super.reset();
   }
 
   @Override
+  public void calculate(boolean b) {
+    RgbCanvas source = (RgbCanvas)getSourceCanvas();
+    source.calculate(true);
+    
+    super.calculate(true);
+  }
+  
+  @Override
   public void calculate() {
     super.calculate();
-    String target = "groups{" + getGroup() + "}.elements{" + name + "}.canvas";
-    RgbCanvas source = (RgbCanvas) getFacade().get(target);
-    source.calculate();
+
+    RgbCanvas source = (RgbCanvas)getSourceCanvas();
 
     for (int cnt = 0; cnt < red.length; cnt++) {
       red[cnt] = source.red()[cnt];

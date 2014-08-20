@@ -11,7 +11,7 @@ public class XmlTest {
 
   public static void main(String[] args) {
     // doFile("walls");
-    doFile("brabra");
+    doFile("valleys");
   }
 
   private static void doFile(String pname) {
@@ -22,7 +22,6 @@ public class XmlTest {
       @Override
       public void update(String path, Object value) {
         System.out.println("update " + path + " to " + value);
-        
       }
     });
 

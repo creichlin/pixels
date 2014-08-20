@@ -10,11 +10,21 @@ public class MonoTile extends DefaultMonoCanvasProducer {
   @Param(0)
   protected MonoCanvas source;
 
+  
+  public void reset() {
+    source.reset();
+    super.reset();
+  }
+
+  @Override
+  public void calculate(boolean t) {
+    source.calculate(true);
+    super.calculate(true);
+  }
+  
   @Override
   public void calculate() {
     super.calculate();
-    source.calculate();
-
     int width = width();
     int height = height();
     

@@ -11,12 +11,24 @@ public class MultiplyRgb extends DefaultRgbCanvasOperation {
   @Param(1)
   private RgbCanvas other;
 
+  public void reset() {
+    super.reset();
+    if(other != null) {
+      other.reset();
+    }
+  }
+
+  @Override
+  public void calculate(boolean b) {
+    if (other != null) {
+      other.calculate(true);
+    }
+    super.calculate(true);
+  }
+
   @Override
   public void calculate() {
     super.calculate();
-    if (other != null) {
-      other.calculate();
-    }
 
     for (int cnt = 0; cnt < red.length; cnt++) {
       float valr = source.red()[cnt];

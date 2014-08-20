@@ -16,9 +16,18 @@ public class DefaultMonoCanvasOperation extends DefaultMonoCanvasProducer {
     return source.height();
   }
 
+
   @Override
-  public void calculate() {
-    super.calculate();
-    source.calculate();
+  public void calculate(boolean force) {
+    source.calculate(true);
+    super.calculate(true);
   }
+
+  @Override
+  public void reset() {
+    super.reset();
+    source.reset();
+  }
+  
+  
 }

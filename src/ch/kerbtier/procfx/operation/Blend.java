@@ -13,12 +13,21 @@ public class Blend extends DefaultRgbCanvasOperation {
   @Param(2)
   protected MonoCanvas blend;
   
+  public void reset() {
+    super.reset();
+    blend.reset();
+    source2.reset();
+  }
+
+  public void calculate(boolean b) {
+    source2.calculate(true);
+    blend.calculate(true);
+
+    super.calculate(true);
+  }
   
   public void calculate() {
     super.calculate();
-    
-    source2.calculate();
-    blend.calculate();
     
     float b[] = blend.mono();
     
@@ -29,7 +38,6 @@ public class Blend extends DefaultRgbCanvasOperation {
     float r2[] = source2.red();
     float g2[] = source2.green();
     float b2[] = source2.blue();
-    
     
     for(int cnt = 0; cnt < red.length; cnt++) {
       float f1 = b[cnt];

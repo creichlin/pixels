@@ -63,7 +63,6 @@ public class Painter {
       data[cnt3 + 2] = b[cnt] * 255;
     }
     WritableRaster wr = img.getRaster();
-    System.out.println("writing: " + width + "/" + height);
     wr.setPixels(0, 0, width, height, data);
   }
 
@@ -103,7 +102,6 @@ public class Painter {
   public static void paint(RgbCanvas canvas, MonoCanvas canvasAlpha, BufferedImage img) {
     int width = canvas.width();
     int height = canvas.height();
-
 
     float[] r = canvas.red();
     float[] g = canvas.green();

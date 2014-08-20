@@ -11,12 +11,20 @@ public class ColorMap extends DefaultRgbCanvasProducer {
   private RGBFunction gradient;
   @Param(0)
   private MonoCanvas source;
+
+  public void calculate(boolean f) {
+    source.calculate(true);
+    super.calculate(f);
+  }
+  
+  public void reset() {
+    super.reset();
+    source.reset();
+  }
   
   @Override
   public void calculate() {
     super.calculate();
-    source.calculate();
-    
     
     for(int cnt = 0; cnt < source.mono().length; cnt++) {
       ColorType col = gradient.get(source.mono()[cnt]);
@@ -36,5 +44,6 @@ public class ColorMap extends DefaultRgbCanvasProducer {
   public int height() {
     return source.height();
   }
+  
   
 }
