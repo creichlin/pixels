@@ -48,21 +48,30 @@ public class Painter {
   public static void paint(RgbCanvas canvas, BufferedImage img) {
     int width = canvas.width();
     int height = canvas.height();
+    
+    WritableRaster wr = img.getRaster();
+
+    int bands = wr.getNumBands();
 
 
     float[] r = canvas.red();
     float[] g = canvas.green();
     float[] b = canvas.blue();
 
-    float[] data = new float[3 * r.length];
+    float[] data = new float[bands * r.length];
 
     for (int cnt = 0; cnt < r.length; cnt++) {
-      int cnt3 = cnt * 3;
-      data[cnt3] = r[cnt] * 255;
-      data[cnt3 + 1] = g[cnt] * 255;
-      data[cnt3 + 2] = b[cnt] * 255;
+      int dataIndex = cnt * bands;
+      data[dataIndex] = r[cnt] * 255;
+      if(bands > 1) {
+        data[dataIndex + 1] = g[cnt] * 255;
+        data[dataIndex + 2] = b[cnt] * 255;
+        if(bands > 3) {
+          data[dataIndex + 3] = 255;
+        }
+      }
     }
-    WritableRaster wr = img.getRaster();
+
     wr.setPixels(0, 0, width, height, data);
   }
 
@@ -87,12 +96,24 @@ public class Painter {
     int width = canvas.width();
     int height = canvas.height();
 
+    WritableRaster wr = img.getRaster();
+    int bands = wr.getNumBands();
+
+    
     float[] mono = canvas.mono();
     
-    float[] data = new float[mono.length];
+    float[] data = new float[mono.length * bands];
     
     for (int cnt = 0; cnt < mono.length; cnt++) {
-      data[cnt] = mono[cnt] * 255;
+      int dataIndex = cnt * bands;
+      data[dataIndex] = mono[cnt] * 255;
+      if(bands > 1) {
+        data[dataIndex + 1] = mono[cnt] * 255;
+        data[dataIndex + 2] = mono[cnt] * 255;
+        if(bands > 3) {
+          data[dataIndex + 3] = 255;
+        }
+      }
     }
 
     img.getRaster().setPixels(0, 0, width, height, data);
@@ -119,7 +140,23 @@ public class Painter {
     }
     WritableRaster wr = img.getRaster();
 
+    if(wr.getNumBands() != 4) {
+      throw new RuntimeException("need 4 bands to write rgb with alpha image");
+    }
+    
     wr.setPixels(0, 0, width, height, data);
+  }
+
+  public static BufferedImage paint(Canvas cv) {
+    BufferedImage target = new BufferedImage(cv.width(), cv.height(), BufferedImage.TYPE_INT_ARGB);
+    paint(cv, target);
+    return target;
+  }
+
+  public static BufferedImage paint(RgbCanvas rgb, MonoCanvas mono) {
+    BufferedImage target = new BufferedImage(rgb.width(), rgb.height(), BufferedImage.TYPE_INT_ARGB);
+    paint(rgb, mono, target);
+    return target;
   }
 
 }

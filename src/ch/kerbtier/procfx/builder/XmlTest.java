@@ -1,10 +1,11 @@
 package ch.kerbtier.procfx.builder;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 
-import ch.kerbtier.procfx.Painter;
-import ch.kerbtier.procfx.core.Canvas;
-import ch.kerbtier.procfx.model.Facade;
+import javax.imageio.ImageIO;
+
 import ch.kerbtier.procfx.model.Listener;
 
 public class XmlTest {
@@ -15,9 +16,9 @@ public class XmlTest {
   }
 
   private static void doFile(String pname) {
-    Facade facade = new Facade();
+    Loader loader = new Loader();
     
-    facade.register(new Listener() {
+    loader.getFacade().register(new Listener() {
       
       @Override
       public void update(String path, Object value) {
@@ -25,15 +26,16 @@ public class XmlTest {
       }
     });
 
-    BuildThem bt = new BuildThem(facade);
-    
-    bt.parse(new File("procfx/" + pname + ".xml"), pname);
+    loader.add(pname, new File("procfx/" + pname + ".xml"));
 
-    Canvas cv = (Canvas)facade.get("groups{" + pname + "}.elements{out}.canvas");
-
-    cv.calculate();
     
-    Painter.paint(cv, "procfx/" + pname);
+    BufferedImage bi = loader.renderImage(pname, "out");
+    
+    try {
+      ImageIO.write(bi, "png", new File("procfx/" + pname + ".png"));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
 }

@@ -15,6 +15,9 @@ public class Use extends DefaultMonoCanvasProducer {
   private MonoCanvas getSourceCanvas() {
     String target = "groups{" + getGroup() + "}.elements{" + name + "}.canvas";
     MonoCanvas source = (MonoCanvas) getFacade().get(target);
+    if(source == null) {
+      throw new RuntimeException(target + " not found");
+    }
     return source;
   }
 

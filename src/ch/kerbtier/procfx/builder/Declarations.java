@@ -28,7 +28,7 @@ public class Declarations {
     declare("Image", ch.kerbtier.procfx.producers.MonoImage.class, ch.kerbtier.procfx.producers.ImageRgb.class);
     declare("DiamondSquare", ch.kerbtier.procfx.producers.DiamondSquareMono.class);
     declare("Expand", ch.kerbtier.procfx.operation.ExpandMono.class);
-    declare("Scale", ch.kerbtier.procfx.geometry.ScaleMono.class);
+    declare("Scale", ch.kerbtier.procfx.geometry.ScaleMono.class, ch.kerbtier.procfx.geometry.ScaleRGB.class);
     declare("WaterErosion", ch.kerbtier.procfx.filter.WaterErosion.class);
     
     
