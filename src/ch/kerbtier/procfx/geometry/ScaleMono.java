@@ -9,28 +9,38 @@ public class ScaleMono extends DefaultMonoCanvasOperation {
   private float x = 0;
   private float y = 0;
 
+  
+  private float xScale() {
+    if(x == 0){
+      return factor;
+    }
+    return x;
+  }
+  
+  private float yScale() {
+    if(y == 0){
+      return factor;
+    }
+    return y;
+  }
+  
   @Override
   public int width() {
-    if(x == 0) {
-      x = factor;
-    }
-    
-    return (int) (source.width() * x);
+    return (int) (source.width() * xScale());
   }
 
   @Override
   public int height() {
-    if(y == 0) {
-      y = factor;
-    }
-    
-    return (int) (source.height() * y);
+    return (int) (source.height() * yScale());
   }
 
   @Override
   public void calculate() {
     super.calculate();
-
+    
+    float x = xScale();
+    float y = yScale();
+    
     int width = width();
     int height = height();
 
